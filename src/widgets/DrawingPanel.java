@@ -12,6 +12,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.text.DecimalFormat;
 import java.util.Observable;
@@ -249,7 +250,13 @@ public class DrawingPanel extends JPanel implements Observer, MouseListener,
 			 */
 			drawingModel.stream().forEach(
 					
-					f -> f.draw(g2D)
+					f -> {
+						AffineTransform t = f.getTransform();
+						if (t != null)
+							g2D.translate(t.getTranslateX(), t.getTranslateY());
+						
+						f.draw(g2D);
+					}
 			);
 		}
 	}

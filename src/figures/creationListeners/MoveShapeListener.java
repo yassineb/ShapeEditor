@@ -2,12 +2,14 @@ package figures.creationListeners;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 
 import javax.swing.JLabel;
 
 import figures.Drawing;
 import figures.Figure;
+import figures.enums.FigureType;
 
 public class MoveShapeListener extends AbstractCreationListener {
 	/**
@@ -23,8 +25,8 @@ public class MoveShapeListener extends AbstractCreationListener {
 	{
 		super(model, infoLabel, 2);
 
-		tips[0] = new String("Clic gauche pour commencer le polygone");
-		tips[1] = new String("clic gauche pour ajouter / droit pour terminer");
+		tips[0] = new String("Drag/drop une figure pour la déplacer");
+		tips[1] = new String("Relâchez pour terminer");
 
 		updateTip();
 
@@ -32,11 +34,7 @@ public class MoveShapeListener extends AbstractCreationListener {
 	}
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		Figure f = drawingModel.getFigureAt(new Point(arg0.getX(), arg0.getY()));
-		if (f != null) {
-				System.out.println(f.getName());
-		}
-		System.out.println("Start: " + arg0.getX() + " " + arg0.getY());
+		
 	}
 
 	@Override
@@ -53,22 +51,36 @@ public class MoveShapeListener extends AbstractCreationListener {
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent arg0) {
+		figure = drawingModel.getFigureAt(new Point(arg0.getX(), arg0.getY()));
 		if (figure != null) {
-			
+				nextStep();
+				System.out.println(figure.getName());
 		}
-		System.out.println("Dragging" + arg0.getX() + " " + arg0.getY());
+		System.out.println("Start: " + arg0.getX() + " " + arg0.getY());
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		if (figure != null) {
+			AffineTransform t = new AffineTransform();
+			t.setToTranslation(e.getX() - figure.getCenter().getX(), e.getY() - figure.getCenter().getY());
+			figure.setTransform(t);
+			System.out.println("f: " + e.getX() + " " + e.getY());
+			nextStep();
+		}
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		if (figure != null) {
+			AffineTransform t = new AffineTransform();
+			t.setToTranslation(e.getX() - figure.getCenter().getX(), e.getY() - figure.getCenter().getY());
+			figure.setTransform(t);			
+			System.out.println("Dragging" + t.getTranslateX() + " " + t.getTranslateY());
+			drawingModel.update();
+		}
+		
 	}
 
 	@Override

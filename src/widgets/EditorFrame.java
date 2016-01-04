@@ -264,6 +264,18 @@ public class EditorFrame extends JFrame
 	 * des rectangles arrondis
 	 */
 	private final Action rRectangleFilterAction = new ShapeFilterAction(FigureType.ROUNDED_RECTANGLE);
+	
+	/**
+	 * Action déclenchée lorsque l'on clique sur l'item de menu de filtrage
+	 * des rectangles arrondis
+	 */
+	private final Action RegularPolygonFilterAction = new ShapeFilterAction(FigureType.REGULAR_POLYGON);
+	
+	/**
+	 * Action déclenchée lorsque l'on clique sur l'item de menu de filtrage
+	 * des rectangles arrondis
+	 */
+	private final Action StarFilterAction = new ShapeFilterAction(FigureType.STAR);
 
 	/**
 	 * Action déclenchée lorsque l'on clique sur l'item de menu de filtrage
@@ -482,6 +494,14 @@ public class EditorFrame extends JFrame
 		JCheckBoxMenuItem chckbxmntmRoundedRectangle = new JCheckBoxMenuItem("Rounded Rectangle");
 		chckbxmntmRoundedRectangle.setAction(rRectangleFilterAction);
 		mnFigures.add(chckbxmntmRoundedRectangle);
+		
+		JCheckBoxMenuItem chckbxmntmRegularPolygon = new JCheckBoxMenuItem("Regular Polygon");
+		chckbxmntmRegularPolygon.setAction(RegularPolygonFilterAction);
+		mnFigures.add(chckbxmntmRegularPolygon);
+		
+		JCheckBoxMenuItem chckbxmntmStar = new JCheckBoxMenuItem("Star");
+		chckbxmntmStar.setAction(StarFilterAction);
+		mnFigures.add(chckbxmntmStar);
 		
 		JMenu mnColors = new JMenu("Colors");
 		mnFilter.add(mnColors);

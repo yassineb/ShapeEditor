@@ -11,11 +11,14 @@ import figures.Drawing;
 import figures.Figure;
 import figures.Circle;
 import figures.Ellipse;
+import figures.Star;
 import figures.Rectangle;
 import figures.Polygon;
+import figures.RegularPolygon;
 import figures.RoundedRectangle;
 import figures.creationListeners.AbstractCreationListener;
 import figures.creationListeners.PolygonCreationListener;
+import figures.creationListeners.RectangularNShapeCreationListener;
 import figures.creationListeners.RectangularShapeCreationListener;
 import figures.creationListeners.RoundedRectangleCreationListener;
 
@@ -33,6 +36,8 @@ public enum FigureType
 	RECTANGLE, 
 	ROUNDED_RECTANGLE, 
 	POLYGON, 
+	REGULAR_POLYGON,
+	STAR,
 	NONE;
 
 	/**
@@ -68,7 +73,11 @@ public enum FigureType
 			case ROUNDED_RECTANGLE:
 				return new RoundedRectangle(stroke, edge, fill, p, p, 0);
 			case POLYGON:
-				return new Polygon(stroke, edge, fill, (Point) p, (Point) p); // recheck (Point())
+				return new Polygon(stroke, edge, fill, (Point) p, (Point) p); 
+			case REGULAR_POLYGON:
+				return new RegularPolygon(stroke, edge, fill, new Point((int)p.getX(), (int)p.getY())); 
+			case STAR:
+				return new Star(stroke, edge, fill, new Point((int)p.getX(), (int)p.getY()));
 			case NONE:
 				return null;
 		}
@@ -98,6 +107,10 @@ public enum FigureType
 				return new RoundedRectangleCreationListener(model, tipLabel);
 			case POLYGON:
 				return new PolygonCreationListener(model, tipLabel);
+			case REGULAR_POLYGON:
+				return new RectangularNShapeCreationListener(model, tipLabel);
+			case STAR:
+				return new RectangularNShapeCreationListener(model, tipLabel);
 			case NONE:
 				return null;
 		}
@@ -126,6 +139,10 @@ public enum FigureType
 				return new String("Rounded Rectangle");
 			case POLYGON:
 				return new String("Polygon");
+			case REGULAR_POLYGON :
+				return new String("Regular Polygon");
+			case STAR:
+				return new String("Star");
 			case NONE:
 				return new String("None");
 		}
@@ -173,6 +190,10 @@ public enum FigureType
 				return ROUNDED_RECTANGLE;
 			case 4:
 				return POLYGON;
+			case 5:
+				return REGULAR_POLYGON;
+			case 6:
+				return STAR;
 			default:
 				return POLYGON;
 		}

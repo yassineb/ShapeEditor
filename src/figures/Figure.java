@@ -39,7 +39,7 @@ public abstract class Figure
 	protected BasicStroke stroke;
 	
 	
-	protected AffineTransform transform;
+	protected AffineTransform transform = null;
 
 	/**
 	 * Le numéro d'instance de cette figure.
