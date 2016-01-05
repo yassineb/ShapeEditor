@@ -5,6 +5,7 @@ import java.awt.Paint;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 
 import figures.enums.FigureType;
 
@@ -49,15 +50,10 @@ public class Star extends Figure
 		this.size = DEFAULT_SIZE;
 		this.angle = DEFAULT_ANGLE;
 		this.n = DEFAULT_N;
-		
-		shape = new Polygon();
-
 		draw();
 	}
 
 	private void draw(){
-		Polygon poly = (Polygon) shape;
-		
 		int xPoly[] = new int[2*n];
 		int yPoly[] = new int[2*n];
 		
@@ -68,10 +64,8 @@ public class Star extends Figure
 		    yPoly[i] = (int) (center.getY() + size*Math.sin(theta * i + angle));
 		    yPoly[i+1] = (int) (center.getY() + size*Math.sin(theta * (i+1) + angle)/2);
 		}
-		
-		poly.xpoints = xPoly;
-		poly.ypoints = yPoly;
-		poly.npoints = xPoly.length;
+
+		shape = new Polygon(xPoly, yPoly, xPoly.length);
 	}
 	/**
 	 * Déplacement du dernier point de la ligne (utilisé lors du dessin d'un
@@ -96,7 +90,8 @@ public class Star extends Figure
 	@Override
 	public Point2D getCenter()
 	{
-		return center;
+		Rectangle2D bounds = shape.getBounds2D();
+		return new Point2D.Double(bounds.getCenterX(), bounds.getCenterY());
 	}
 	
  	/**
@@ -117,6 +112,7 @@ public class Star extends Figure
 
 	public void setN(Point p) {
 		int n = (int) (p.distance(center) - size) / 10 + DEFAULT_N;
+		this.n = (n <= 3) ? 3 : n;
 		draw();
 	}
 }

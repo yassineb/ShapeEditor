@@ -89,9 +89,8 @@ public class Rectangle extends Figure
 	@Override
 	public Point2D getCenter()
 	{
-		RectangularShape rect = (RectangularShape) shape;
-
-		return new Point2D.Double(rect.getCenterX(), rect.getCenterY());
+		Rectangle2D bounds = shape.getBounds2D();
+		return new Point2D.Double(bounds.getCenterX(), bounds.getCenterY());
 	}
 	
  	/**

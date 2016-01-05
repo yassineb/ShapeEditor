@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Paint;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 
 import figures.enums.FigureType;
 
@@ -69,9 +70,9 @@ public class Ellipse extends Figure
 	@Override
 	public Point2D getCenter()
 	{
-		Ellipse2D.Float ellipse = (Ellipse2D.Float) shape;
+		Rectangle2D bounds = shape.getBounds2D();
 
-		return new Point2D.Double(ellipse.getCenterX(), ellipse.getCenterY());
+		return new Point2D.Double(bounds.getCenterX(), bounds.getCenterY());
 	}
 	
  	/**

@@ -5,6 +5,7 @@ import java.awt.Paint;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 
 import figures.enums.FigureType;
 
@@ -49,15 +50,10 @@ public class RegularPolygon extends Figure
 		this.size = DEFAULT_SIZE;
 		this.angle = DEFAULT_ANGLE;
 		this.n = DEFAULT_N;
-		
-		shape = new Polygon();
-
 		draw();
 	}
 
 	private void draw(){
-		Polygon polygon = (Polygon) shape;
-		
 		int xPolygon[] = new int[n];
 		int yPolygon[] = new int[n];
 		
@@ -66,10 +62,8 @@ public class RegularPolygon extends Figure
 		    xPolygon[i] = (int) (center.getX() + size*Math.cos(theta * i + angle));
 		    yPolygon[i] = (int) (center.getY() + size*Math.sin(theta * i + angle));
 		}
-		
-		polygon.xpoints = xPolygon;
-		polygon.ypoints = yPolygon;
-		polygon.npoints = xPolygon.length;
+
+		shape = new Polygon(xPolygon, yPolygon, xPolygon.length);
 	}
 	/**
 	 * Déplacement du dernier point de la ligne (utilisé lors du dessin d'un
@@ -94,7 +88,8 @@ public class RegularPolygon extends Figure
 	@Override
 	public Point2D getCenter()
 	{
-		return center;
+		Rectangle2D bounds = shape.getBounds2D();
+		return new Point2D.Double(bounds.getCenterX(), bounds.getCenterY());
 	}
 	
  	/**

@@ -57,9 +57,9 @@ public enum PaintToType
 		switch (this)
 		{
 			case FILL:
-				return new String("Fill");
+				return new String("FillColor");
 			case EDGE:
-				return new String("Edge");
+				return new String("EdgeColor");
 		}
 
 		throw new AssertionError("PaintApplicationType Unknown assertion "

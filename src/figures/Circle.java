@@ -2,6 +2,7 @@ package figures;
 
 import java.awt.BasicStroke;
 import java.awt.Paint;
+import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 
@@ -39,7 +40,6 @@ public class Circle extends Figure
 			float rayon)
 	{
 		super(stroke, edge, fill);
-		System.out.println(stroke.getLineWidth());
 		instanceNumber = ++counter;
 		float width = rayon * 2.0f;
 		float height = width;
@@ -78,10 +78,10 @@ public class Circle extends Figure
 	@Override
 	public Point2D getCenter()
 	{
-		Ellipse2D.Float ellipse = (Ellipse2D.Float) shape;
+		Shape ellipse = shape;
 
-		return new Point2D.Float((float) ellipse.getCenterX(),
-				(float) ellipse.getCenterY());
+		return new Point2D.Float((float) ellipse.getBounds2D().getCenterX(),
+				(float) ellipse.getBounds2D().getCenterY());
 	}
 	
  	/**

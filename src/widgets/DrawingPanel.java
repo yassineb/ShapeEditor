@@ -248,16 +248,7 @@ public class DrawingPanel extends JPanel implements Observer, MouseListener,
 			 * expression sur le flux (éventuellement filtré) : pour chaque 
 			 * figure du flux il faut la dessiner (avec sa méthode draw)
 			 */
-			drawingModel.stream().forEach(
-					
-					f -> {
-						AffineTransform t = f.getTransform();
-						if (t != null)
-							g2D.translate(t.getTranslateX(), t.getTranslateY());
-						
-						f.draw(g2D);
-					}
-			);
+			drawingModel.stream().forEach(f -> f.draw(g2D));
 		}
 	}
 

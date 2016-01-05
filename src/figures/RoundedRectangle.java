@@ -58,7 +58,7 @@ public class RoundedRectangle extends Rectangle
 	}
 
 	/**
-	 * Mise en place de la taille de l'arc en focntion de la position
+	 * Mise en place de la taille de l'arc en fonction de la position
 	 * d'un point par rapport au coin inférieur droit
 	 * @param p le point déterminant la taille de l'arc
 	 */
@@ -84,7 +84,7 @@ public class RoundedRectangle extends Rectangle
 				rect.archeight = 0;
 			}
 		}
-		else // x <= bottomRightX
+		else
 		{
 			if (y > bottomRightY)
 			{

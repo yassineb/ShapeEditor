@@ -394,7 +394,6 @@ public class Drawing extends Observable
 	public void setFillColorFilter(FillColorFilter filter)
 	{
 		fillColorFilter = filter;
-		
 	}
 	
 	/**

@@ -715,16 +715,18 @@ public class EditorFrame extends JFrame
 			boolean movemode = !drawingModel.isMoveMode();
 			drawingModel.setMoveMode(movemode);
 			
-			if (movemode) {
-				drawingPanel.removeCreationListener(creationListener);
+			drawingPanel.removeCreationListener(creationListener);
+			
+			if (movemode) {				
 				creationListener = new MoveShapeListener(drawingModel, infoLabel);
 				drawingPanel.addCreationListener(creationListener);
 			}
-			else {				
-				drawingPanel.removeCreationListener(creationListener);
+			else {
 				creationListener = drawingModel.getType().getCreationListener(drawingModel, infoLabel);
 				drawingPanel.addCreationListener(creationListener);	
-			}			
+			}
+				
+			drawingPanel.repaint();
 		}
 	}
 
@@ -779,7 +781,7 @@ public class EditorFrame extends JFrame
 			 * type JOptionPane.INFORMATION_MESSAGE
 			 */
 			//JOptionPane.showMessageDialog(null, "Projet d'ILO 2013-2014.\nRéalisé par Maxence Bobin et François Ho.", "Projet d'ILO 2013-2014.\n Réalisé par Maxence Bobin et Fran
-			JOptionPane.showMessageDialog(null, "Projet d'ILO 2015-2016.\nRéalisé par Yassine Belcaid et Nicolas Venter.", "Figure Editor v3.0", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Projet d'ILO 2015-2016.\nRéalisé par Yassine Belcaid.", "Figure Editor v3.0", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	

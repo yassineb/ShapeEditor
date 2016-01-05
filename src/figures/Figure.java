@@ -64,6 +64,7 @@ public abstract class Figure
 		this.edge = edge;
 		this.fill = fill;
 		shape = null;
+		transform = null;
 	}
 
 	/**
@@ -93,6 +94,11 @@ public abstract class Figure
 		{
 			g2D.setStroke(stroke);
 			g2D.setPaint(edge);
+			if (transform != null)
+				g2D.translate(transform.getTranslateX(), transform.getTranslateY());
+			else
+				g2D.translate(0, 0);
+			
 			g2D.draw(shape);
 		}
 	}
@@ -184,6 +190,8 @@ public abstract class Figure
 	public void setTransform(AffineTransform transform) {
 		this.transform = transform;
 	}
-	
-	
+
+	public void setShape(Shape shape) {
+		this.shape = shape;		
+	}	
 }

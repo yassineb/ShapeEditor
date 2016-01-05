@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Paint;
 import java.awt.Point;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 
 import figures.enums.FigureType;
 
@@ -105,7 +106,11 @@ public class Polygon extends Figure
 	@Override
 	public Point2D getCenter()
 	{
-		java.awt.Polygon poly = (java.awt.Polygon) shape;
+		Rectangle2D bounds = shape.getBounds2D();
+		return new Point2D.Double(bounds.getCenterX(), bounds.getCenterY());
+		
+		/*
+		java.awt.Polygon poly = (java.awt.Polygon) shape;	=> Can't cast Path2D to Polygon
 
 		float xm = 0.0f;
 		float ym = 0.0f;
@@ -122,7 +127,7 @@ public class Polygon extends Figure
 			ym /= poly.npoints;
 		}
 
-		return new Point2D.Float(xm, ym);
+		return new Point2D.Float(xm, ym);*/
 	}
 	
  	/**

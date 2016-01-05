@@ -198,8 +198,9 @@ public class InfoPanel extends JPanel
 
 		// Compléter ...
 		// figure
-		lblFigureName = new JLabel(emptyString);
+		lblFigureName = new JLabel("fg");
 		GridBagConstraints gbc_lblFigureName = new GridBagConstraints();
+		gbc_lblFigureName.gridwidth = 2;
 		gbc_lblFigureName.insets = new Insets(0, 0, 5, 5);
 		gbc_lblFigureName.gridx = 2;
 		gbc_lblFigureName.gridy = 0;

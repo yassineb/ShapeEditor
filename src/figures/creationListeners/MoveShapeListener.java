@@ -51,22 +51,14 @@ public class MoveShapeListener extends AbstractCreationListener {
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		figure = drawingModel.getFigureAt(new Point(arg0.getX(), arg0.getY()));
-		if (figure != null) {
+		figure = drawingModel.getFigureAt(arg0.getPoint());
+		if (figure != null)
 				nextStep();
-				System.out.println(figure.getName());
-		}
-		System.out.println("Start: " + arg0.getX() + " " + arg0.getY());
-
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		if (figure != null) {
-			AffineTransform t = new AffineTransform();
-			t.setToTranslation(e.getX() - figure.getCenter().getX(), e.getY() - figure.getCenter().getY());
-			figure.setTransform(t);
-			System.out.println("f: " + e.getX() + " " + e.getY());
 			nextStep();
 		}
 	}
@@ -75,12 +67,10 @@ public class MoveShapeListener extends AbstractCreationListener {
 	public void mouseDragged(MouseEvent e) {
 		if (figure != null) {
 			AffineTransform t = new AffineTransform();
-			t.setToTranslation(e.getX() - figure.getCenter().getX(), e.getY() - figure.getCenter().getY());
-			figure.setTransform(t);			
-			System.out.println("Dragging" + t.getTranslateX() + " " + t.getTranslateY());
+			t.translate(e.getX() - figure.getCenter().getX(), e.getY() - figure.getCenter().getY());
+			figure.setShape(t.createTransformedShape(figure.getShape()));		
 			drawingModel.update();
-		}
-		
+		}		
 	}
 
 	@Override
