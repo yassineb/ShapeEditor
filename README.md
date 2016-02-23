@@ -1,1 +1,0 @@
-OOP course project: A Paint-like program.
